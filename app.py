@@ -35,7 +35,7 @@ data=load_data()
 
 
 st.markdown('<style>description{colr:blue;}</style>',unsafe_allow_html=True)
-st.title('🦠Covid-19 Impact in India Hello')
+st.title('🦠Covid-19 Impact in India')
 st.markdown("<description>The objective of this website is to offer an ongoing assessment of"+"COVID-19's impact in India.This website gives you the real time impact analysis of confirmed,"+"active,recovered,and death cases of Covid-19 on National-,State-,and District-level basis."+"The website's data is updated every 5 minutes in order to ensure the delivery of true and"+"accurate data.</description>",unsafe_allow_html=True)
 st.sidebar.title('Select the parameters to analyze Covid-19 situation')
 
@@ -83,7 +83,7 @@ st.table(datatable)# will display the table
 
 if st.checkbox(label="Predict?"):
   model = keras.models.load_model('model_final.h5')
-  buffer = st.file_uploader("Image here pl0x")
+  buffer = st.file_uploader("Upload X-Ray Image here")
   temp_file = NamedTemporaryFile(delete=False)
   if buffer:
     temp_file.write(buffer.getvalue())
@@ -93,8 +93,8 @@ if st.checkbox(label="Predict?"):
     img=np.expand_dims(img,axis=0)
     pred=model.predict_classes(img)
     if(pred[0][0]==1):
-      st.write("Normal")
+      st.title("Prediction-Normal")
 
     else:
-      st.write("Covid")
+      st.title("Prediction-Covid")
     
